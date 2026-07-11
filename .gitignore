@@ -1,0 +1,18 @@
+# Named profiles and credential documentation
+cloudblueprint/developer.md
+
+# Virtual environments
+venv/
+.venv/
+env/
+
+# Python caching
+__pycache__/
+*.pyc
+
+# Local secrets / zip archives
+*.zip
+response.json
+response-history.json
+outfile.txt
+output.json

@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CloudBlueprint — AI AWS Architecture Generator</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Google Material Symbols Rounded -->
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet" />
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="stylesheet" href="index.css">
+</head>
+<body>
+  
+  <div class="glass-bg-circles">
+    <div class="circle circle-1"></div>
+    <div class="circle circle-2"></div>
+  </div>
+
+  <div class="container">
+    <!-- Header -->
+    <header class="header">
+      <div class="logo">
+        <i data-lucide="cloud-lightning" class="logo-icon"></i>
+        <span>CloudBlueprint</span>
+      </div>
+      <div class="nav-tabs">
+        <button class="tab-btn active" id="tab-generator">
+          <i data-lucide="layout-grid"></i> Generator
+        </button>
+        <button class="tab-btn" id="tab-history">
+          <i data-lucide="history"></i> Past Blueprints
+        </button>
+      </div>
+    </header>
+
+    <!-- Main Workspace -->
+    <main class="main-content">
+      
+      <!-- GENERATOR VIEW -->
+      <section id="generator-view" class="view-section active">
+        <div class="hero">
+          <h1>Whiteboard your AWS stack <span class="gradient-text">instantly</span>.</h1>
+          <p>Describe your app idea in plain English. Get a recommended serverless architecture, an interactive service flow, and an ordered build plan.</p>
+        </div>
+
+        <div class="input-panel glass-panel">
+          <form id="generator-form">
+            <div class="input-group">
+              <div class="label-row">
+                <label for="idea-input">Describe your app idea</label>
+                <button type="button" id="btn-refine" class="btn-refine" title="Enhance prompt with AI">
+                  <span class="material-symbols-rounded refine-icon">auto_fix_high</span>
+                  <span>AI Refine</span>
+                </button>
+              </div>
+              <textarea 
+                id="idea-input" 
+                rows="3" 
+                placeholder="e.g., A campus food delivery app where students order from local vendors, paying with Stripe, with real-time driver tracking..."
+                required
+              ></textarea>
+            </div>
+            <div class="form-actions">
+              <button type="submit" class="btn-primary" id="generate-btn">
+                <span>Generate Blueprint</span>
+                <i data-lucide="arrow-right"></i>
+              </button>
+            </div>
+          </form>
+        </div>
+
+        <!-- Result Section -->
+        <div id="result-container" class="result-container hidden">
+          <div class="result-header">
+            <h2 id="result-title">Architecture Recommendation</h2>
+            <div class="badges">
+              <span class="badge" id="badge-complexity">
+                <i data-lucide="gauge"></i>
+                <span class="badge-text">Intermediate</span>
+              </span>
+              <span class="badge" id="badge-cost">
+                <i data-lucide="dollar-sign"></i>
+                <span class="badge-text">Free Tier Eligible</span>
+              </span>
+            </div>
+          </div>
+
+          <div class="grid-layout">
+            <!-- Left Pane: Summary and Visual Stack Diagram -->
+            <div class="left-pane glass-panel">
+              <h3><i data-lucide="layout"></i> Architecture Design</h3>
+              <p id="architecture-summary" class="summary-text"></p>
+              
+              <div class="diagram-container">
+                <div class="diagram-header">
+                  <span>Interactive System Flow</span>
+                  <div style="display: flex; align-items: center; gap: 15px;">
+                    <span class="live-indicator"><span class="dot"></span> Active Stack</span>
+                    <button id="btn-fullscreen" class="btn-icon" title="Toggle Fullscreen">
+                      <i data-lucide="maximize-2"></i>
+                    </button>
+                  </div>
+                </div>
+                <div class="diagram-canvas-wrapper">
+                  <svg id="diagram-canvas" class="diagram-canvas"></svg>
+                  <div id="diagram-nodes-layer" class="diagram-nodes-layer"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right Pane: Step-by-Step Implementation Sequence -->
+            <div class="right-pane glass-panel">
+              <h3><i data-lucide="list-todo"></i> Order of Operations</h3>
+              <p class="section-desc">Mark off steps as you complete them to track your hackathon build progress:</p>
+              
+              <div class="checklist" id="build-checklist">
+                <!-- Checklist items will be dynamically generated -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- HISTORY VIEW -->
+      <section id="history-view" class="view-section">
+        <div class="history-header">
+          <h2>Shared & Past Blueprints</h2>
+          <p>Browse previously generated cloud architecture templates from the community library.</p>
+        </div>
+        <div id="history-list" class="history-grid">
+          <!-- History cards will be dynamically generated -->
+        </div>
+        <div id="history-empty" class="history-empty glass-panel hidden">
+          <i data-lucide="folder-open" class="empty-icon"></i>
+          <p>No architectures generated yet. Head over to the Generator to make your first blueprint!</p>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <p>Built for the AWS Builder Challenge &bull; Serverless & AI Stack</p>
+    </footer>
+  </div>
+
+  <script src="app.js?v=3"></script>
+</body>
+</html>
