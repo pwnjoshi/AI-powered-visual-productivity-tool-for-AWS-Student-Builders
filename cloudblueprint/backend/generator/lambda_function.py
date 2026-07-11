@@ -32,6 +32,16 @@ BEDROCK_MODEL = "us.amazon.nova-2-lite-v1:0"
 SYSTEM_PROMPT = """You are CloudBlueprint, an expert AWS Solutions Architect assistant.
 Your task is to take a user's project idea and recommend a suitable AWS architecture.
 
+Ensure the architecture is fully detailed and production-ready. Recommend all necessary components for a production application:
+- Hosting/CDN layer (e.g., S3, Amplify, CloudFront)
+- API/Routing layer (e.g., API Gateway, Route 53)
+- Compute layer (e.g., Lambda, ECS, Fargate)
+- Auth & Security layer (e.g., Cognito, IAM, Secrets Manager)
+- Database & Storage layer (e.g., DynamoDB, RDS, S3)
+- Integration & Monitoring layer (e.g., SNS, SQS, CloudWatch)
+
+For the cost estimate: DO NOT output broad ranges like "~$100-$500/month". Instead, calculate a realistic, granular monthly cost estimate based on the recommended services (e.g., "Free tier eligible", "DynamoDB: ~$0.59/mo, Lambda: ~$1.20/mo (Total: ~$1.79/mo)", "ECS/Fargate + RDS Aurora: ~$34.50/mo").
+
 You must return ONLY a JSON object and nothing else. No markdown wrapping (like ```json), no preamble, no explanations outside the JSON.
 The JSON must follow this exact shape:
 {
@@ -43,7 +53,7 @@ The JSON must follow this exact shape:
     "Step 3: ..."
   ],
   "complexity": "Beginner | Intermediate | Advanced",
-  "estimated_monthly_cost": "Free tier eligible | ~$X/month"
+  "estimated_monthly_cost": "Granular service cost breakdown..."
 }
 """
 
@@ -169,8 +179,8 @@ def lambda_handler(event, context):
                     res_body = json.loads(response.read().decode('utf-8'))
                     raw_text = res_body['choices'][0]['message']['content'].strip()
             except Exception as bedrock_err:
-                print(f"Bedrock invocation failed: {bedrock_err}")
-                raise Exception(f"Bedrock (Nova 2 Lite) failed: {bedrock_err}")
+                print(f"Bedrock invocation failed, falling back to Gemma: {bedrock_err}")
+                # Fall through to Gemma instead of throwing an error
 
         if not raw_text:
             # Request payload for Gemma 3 27B model
@@ -214,13 +224,36 @@ def lambda_handler(event, context):
         
         result = json.loads(raw_text)
         
-        # Hydrate with UUID and Timestamp
+        # Fetch client metrics from API Gateway request context / headers
+        request_context = event.get('requestContext', {})
+        identity = request_context.get('identity', {})
+        
+        # IP Address
+        client_ip = identity.get('sourceIp', 'unknown-ip')
+        if client_ip == 'unknown-ip' and 'headers' in event:
+            client_ip = event['headers'].get('X-Forwarded-For', event['headers'].get('x-forwarded-for', 'unknown-ip'))
+            
+        # User Agent (browser & OS info)
+        user_agent = identity.get('userAgent', 'unknown-agent')
+        if user_agent == 'unknown-agent' and 'headers' in event:
+            user_agent = event['headers'].get('User-Agent', event['headers'].get('user-agent', 'unknown-agent'))
+
+        # Fetch custom user identifier / country if forwarded by API Gateway/CloudFront
+        client_country = 'unknown-country'
+        if 'headers' in event:
+            client_country = event['headers'].get('CloudFront-Viewer-Country', event['headers'].get('cloudfront-viewer-country', 'unknown-country'))
+
+        # Hydrate with UUID, Timestamp, and Metrics Metadata
         arch_id = str(uuid.uuid4())
         created_at = datetime.datetime.utcnow().isoformat() + 'Z'
         
         result['arch_id'] = arch_id
         result['idea_text'] = idea
         result['created_at'] = created_at
+        result['client_ip'] = client_ip
+        result['user_agent'] = user_agent
+        result['client_country'] = client_country
+        result['selected_model'] = selected_model
         
         # Save to DynamoDB
         table.put_item(Item=result)

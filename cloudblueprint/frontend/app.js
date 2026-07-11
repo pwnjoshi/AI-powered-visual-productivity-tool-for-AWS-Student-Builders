@@ -51,8 +51,8 @@ const SERVICE_ICONS = {
   "Amazon Route 53": "https://unpkg.com/aws-icons@3.3.0/icons/architecture-service/AmazonRoute53.svg",
   "ACM": "https://unpkg.com/aws-icons@3.3.0/icons/architecture-service/AWSCertificateManager.svg",
   "AWS Certificate Manager": "https://unpkg.com/aws-icons@3.3.0/icons/architecture-service/AWSCertificateManager.svg",
-  "S3": "https://unpkg.com/aws-icons@3.3.0/icons/architecture-service/AmazonS3.svg",
-  "Amazon S3": "https://unpkg.com/aws-icons@3.3.0/icons/architecture-service/AmazonS3.svg",
+  "S3": "https://unpkg.com/aws-icons@3.3.0/icons/architecture-service/AmazonSimpleStorageService.svg",
+  "Amazon S3": "https://unpkg.com/aws-icons@3.3.0/icons/architecture-service/AmazonSimpleStorageService.svg",
   "SNS": "https://unpkg.com/aws-icons@3.3.0/icons/architecture-service/AmazonSimpleNotificationService.svg",
   "Amazon SNS": "https://unpkg.com/aws-icons@3.3.0/icons/architecture-service/AmazonSimpleNotificationService.svg",
   "SQS": "https://unpkg.com/aws-icons@3.3.0/icons/architecture-service/AmazonSimpleQueueService.svg",
@@ -100,6 +100,7 @@ async function fetchSavedBlueprints() {
     const data = await response.json();
     if (Array.isArray(data)) {
       savedBlueprints = data;
+      renderHistoryList(); // Render updated DynamoDB entries in UI list
     }
   } catch (err) {
     console.warn("Could not load dynamic history, using mock fallback:", err);
@@ -202,47 +203,7 @@ document.addEventListener("DOMContentLoaded", () => {
         renderVisualDiagram(currentBlueprint.services);
       }
     });
-  // Global Keyboard Shortcuts
-  window.addEventListener("keydown", (e) => {
-    // Ignore keyboard shortcuts if the user is typing in a textarea or input field
-    const activeEl = document.activeElement;
-    const isTyping = activeEl && (activeEl.tagName === "TEXTAREA" || activeEl.tagName === "INPUT" || activeEl.tagName === "SELECT");
-
-    // ESC key: always exits fullscreen or clears focus
-    if (e.key === "Escape") {
-      const container = document.querySelector(".diagram-container");
-      if (container && container.classList.contains("fullscreen")) {
-        btnFullscreen.click();
-      }
-      return;
-    }
-
-    if (isTyping) return; // Stop shortcut logic if typing
-
-    // Navigation and Action Triggers
-    const key = e.key.toLowerCase();
-    
-    // Alt + G: Go to Generator Tab
-    if (e.altKey && key === "g") {
-      e.preventDefault();
-      tabGenerator.click();
-    }
-    // Alt + H: Go to Past Blueprints Tab
-    else if (e.altKey && key === "h") {
-      e.preventDefault();
-      tabHistory.click();
-    }
-    // Alt + W: Go to How It Works Docs Tab
-    else if (e.altKey && key === "w") {
-      e.preventDefault();
-      if (tabDocs) tabDocs.click();
-    }
-    // Alt + F: Toggle diagram Fullscreen
-    else if (e.altKey && key === "f") {
-      e.preventDefault();
-      if (btnFullscreen) btnFullscreen.click();
-    }
-  });
+  }
 
   // Form Submission
   const form = document.getElementById("generator-form");
@@ -352,6 +313,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       // Add to saved history and render
       savedBlueprints.unshift(currentBlueprint);
+      renderHistoryList(); // Dynamically update history list in DOM immediately
       renderBlueprintResult(currentBlueprint);
     } catch (err) {
       console.error("Error processing blueprint result:", err);
