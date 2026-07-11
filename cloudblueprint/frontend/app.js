@@ -202,7 +202,47 @@ document.addEventListener("DOMContentLoaded", () => {
         renderVisualDiagram(currentBlueprint.services);
       }
     });
-  }
+  // Global Keyboard Shortcuts
+  window.addEventListener("keydown", (e) => {
+    // Ignore keyboard shortcuts if the user is typing in a textarea or input field
+    const activeEl = document.activeElement;
+    const isTyping = activeEl && (activeEl.tagName === "TEXTAREA" || activeEl.tagName === "INPUT" || activeEl.tagName === "SELECT");
+
+    // ESC key: always exits fullscreen or clears focus
+    if (e.key === "Escape") {
+      const container = document.querySelector(".diagram-container");
+      if (container && container.classList.contains("fullscreen")) {
+        btnFullscreen.click();
+      }
+      return;
+    }
+
+    if (isTyping) return; // Stop shortcut logic if typing
+
+    // Navigation and Action Triggers
+    const key = e.key.toLowerCase();
+    
+    // Alt + G: Go to Generator Tab
+    if (e.altKey && key === "g") {
+      e.preventDefault();
+      tabGenerator.click();
+    }
+    // Alt + H: Go to Past Blueprints Tab
+    else if (e.altKey && key === "h") {
+      e.preventDefault();
+      tabHistory.click();
+    }
+    // Alt + W: Go to How It Works Docs Tab
+    else if (e.altKey && key === "w") {
+      e.preventDefault();
+      if (tabDocs) tabDocs.click();
+    }
+    // Alt + F: Toggle diagram Fullscreen
+    else if (e.altKey && key === "f") {
+      e.preventDefault();
+      if (btnFullscreen) btnFullscreen.click();
+    }
+  });
 
   // Form Submission
   const form = document.getElementById("generator-form");

@@ -1260,3 +1260,33 @@ body.diagram-fullscreen-active .left-pane {
   word-break: break-word;
   tab-size: 2;
 }
+
+/* -------------------------------------------
+   KEYBOARD SHORTCUT INDICATOR HINTS
+   ------------------------------------------- */
+
+.kb-hint {
+  font-size: 0.65rem;
+  padding: 2px 5px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 4px;
+  color: rgba(255, 255, 255, 0.45);
+  margin-left: 6px;
+  font-family: monospace;
+  font-weight: 500;
+  display: inline-block;
+  pointer-events: none;
+}
+
+.tab-btn:hover .kb-hint {
+  color: rgba(255, 255, 255, 0.85);
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.tab-btn.active .kb-hint {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.25);
+  color: white;
+}
