@@ -7,12 +7,14 @@
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Space+Grotesk:wght@800&display=swap" rel="stylesheet">
   <!-- Google Material Symbols Rounded -->
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet" />
   <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest"></script>
   <link rel="stylesheet" href="index.css">
+  <!-- Custom modern favicon -->
+  <link rel="shortcut icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23a259ff' d='M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM19 18H6c-2.21 0-4-1.79-4-4 0-2.05 1.53-3.76 3.56-3.97l1.07-.11.5-.95C8.08 7.14 9.94 6 12 6c2.62 0 4.88 1.86 5.39 4.43l.3 1.5 1.53.11c1.56.1 2.78 1.41 2.78 2.96 0 1.65-1.35 3-3 3z'/%3E%3Cpath fill='%2367e8f9' d='M12.5 8h-3l-2.5 6h3.5l-.5 4 4.5-6.5h-3.5z'/%3E%3C/svg%3E" type="image/svg+xml">
 </head>
 <body>
   
@@ -34,6 +36,9 @@
         </button>
         <button class="tab-btn" id="tab-history">
           <i data-lucide="history"></i> Past Blueprints
+        </button>
+        <button class="tab-btn" id="tab-docs">
+          <i data-lucide="book-open"></i> How It Works
         </button>
       </div>
     </header>
@@ -64,6 +69,16 @@
                 placeholder="e.g., A campus food delivery app where students order from local vendors, paying with Stripe, with real-time driver tracking..."
                 required
               ></textarea>
+            </div>
+            <div class="input-group">
+              <label for="model-select">AI Inference Model</label>
+              <select id="model-select" class="model-select">
+                <option value="gemma">Gemma 3 27B (High-Speed Inference - Default)</option>
+                <option value="bedrock">Amazon Bedrock Nova 2 Lite ✦ (Official AWS Model)</option>
+              </select>
+              <p id="model-hint" class="model-hint model-hint--gemma">
+                ⚡ Fast and reliable. Always works.
+              </p>
             </div>
             <div class="form-actions">
               <button type="submit" class="btn-primary" id="generate-btn">
@@ -102,7 +117,7 @@
                   <div style="display: flex; align-items: center; gap: 15px;">
                     <span class="live-indicator"><span class="dot"></span> Active Stack</span>
                     <button id="btn-fullscreen" class="btn-icon" title="Toggle Fullscreen">
-                      <i data-lucide="maximize-2"></i>
+                      <span class="material-symbols-rounded" style="font-size: 20px;">fullscreen</span>
                     </button>
                   </div>
                 </div>
@@ -123,7 +138,35 @@
               </div>
             </div>
           </div>
+
+          <!-- Agent Blueprint Panel -->
+          <div class="agent-blueprint-panel glass-panel" id="agent-blueprint-panel">
+            <div class="agent-bp-header">
+              <div class="agent-bp-title">
+                <span class="material-symbols-rounded" style="font-size:28px;color:#a5b4fc;">smart_toy</span>
+                <div>
+                  <h3>Agent-Ready Blueprint</h3>
+                  <p class="agent-bp-subtitle">Hand this to any AI agent to autonomously build your full infrastructure</p>
+                </div>
+              </div>
+              <div class="agent-bp-actions">
+                <button class="btn-agent-action" id="btn-copy-blueprint" title="Copy Markdown">
+                  <span class="material-symbols-rounded" style="font-size:18px;">content_copy</span>
+                  <span>Copy</span>
+                </button>
+                <button class="btn-agent-action btn-agent-download" id="btn-download-blueprint" title="Download .md file">
+                  <span class="material-symbols-rounded" style="font-size:18px;">download</span>
+                  <span>Download .md</span>
+                </button>
+              </div>
+            </div>
+            <div class="agent-bp-code-wrapper">
+              <pre id="agent-blueprint-content" class="agent-bp-code"></pre>
+            </div>
+          </div>
+
         </div>
+
       </section>
 
       <!-- HISTORY VIEW -->
@@ -138,6 +181,80 @@
         <div id="history-empty" class="history-empty glass-panel hidden">
           <i data-lucide="folder-open" class="empty-icon"></i>
           <p>No architectures generated yet. Head over to the Generator to make your first blueprint!</p>
+        </div>
+      </section>
+
+      <!-- HOW IT WORKS & API REFERENCE VIEW -->
+      <section id="docs-view" class="view-section">
+        <div class="docs-container">
+          <div class="docs-header">
+            <h2>System Architecture & API Specs</h2>
+            <p>Learn how CloudBlueprint processes English prompts into production-grade infrastructure code and diagrams.</p>
+          </div>
+
+          <div class="docs-grid">
+            <!-- Documentation Card 1: Handoff Flow -->
+            <div class="docs-card glass-panel">
+              <div class="docs-card-icon"><span class="material-symbols-rounded" style="font-size:32px;color:#a5b4fc;display:block;">precision_manufacturing</span></div>
+              <h3>AI-to-AI Handoff Pipeline</h3>
+              <p>When you describe an application idea, CloudBlueprint performs a multi-stage compilation:</p>
+              <ul class="docs-list">
+                <li><strong>Refinement:</strong> LLM expands your user intent into structural requirements, correcting any ambiguities or omissions.</li>
+                <li><strong>Classification:</strong> The services list is filtered and layered into logical tiers (Hosting, API, Compute, DB, Auth).</li>
+                <li><strong>IaC Manifestation:</strong> Automatically writes an AWS CDK script matching the classification layers.</li>
+              </ul>
+            </div>
+
+            <!-- Documentation Card 2: Interactive API Docs -->
+            <div class="docs-card glass-panel">
+              <div class="docs-card-icon"><span class="material-symbols-rounded" style="font-size:32px;color:#67e8f9;display:block;">api</span></div>
+              <h3>Production API Reference</h3>
+              <p>Integrate CloudBlueprint's generation capabilities directly into your custom scripts or CLI tools.</p>
+              
+              <div class="api-endpoint">
+                <span class="api-method">POST</span>
+                <code class="api-path">/generate</code>
+              </div>
+              
+              <pre class="api-code-example">
+// Request payload:
+{
+  "idea": "a serverless URL shortener",
+  "model": "gemma" // "gemma" or "bedrock"
+}
+
+// Response:
+{
+  "idea_text": "a serverless URL shortener",
+  "services": ["S3", "API Gateway", "Lambda", "DynamoDB"],
+  "architecture_summary": "Scalable URL redirection...",
+  "build_steps": ["Create DynamoDB table...", "..."],
+  "complexity": "Beginner",
+  "estimated_monthly_cost": "Free tier eligible"
+}</pre>
+            </div>
+
+            <!-- Documentation Card 3: Backend Stack Overview -->
+            <div class="docs-card glass-panel" style="grid-column: 1 / -1;">
+              <div class="docs-card-icon"><span class="material-symbols-rounded" style="font-size:32px;color:#f472b6;display:block;">dns</span></div>
+              <h3>Serverless Engine Architecture</h3>
+              <p>The backend is fully decoupled and scales automatically on AWS infrastructure:</p>
+              <div style="display: flex; flex-wrap: wrap; gap: 20px; margin-top: 15px;">
+                <div style="flex: 1; min-width: 200px;">
+                  <h4 style="color: var(--accent-cyan); margin-bottom: 8px;">📡 API Gateway</h4>
+                  <p style="font-size: 0.85rem; color: var(--text-secondary);">Handles CORS validation, routes client actions to the proper handler, and provides immediate responses.</p>
+                </div>
+                <div style="flex: 1; min-width: 200px;">
+                  <h4 style="color: #4ade80; margin-bottom: 8px;">⚡ Lambda Function</h4>
+                  <p style="font-size: 0.85rem; color: var(--text-secondary);">Runs Python 3.12 microservices that process schemas, contact AI models, and write results back to the library.</p>
+                </div>
+                <div style="flex: 1; min-width: 200px;">
+                  <h4 style="color: #fbbf24; margin-bottom: 8px;">🗄️ DynamoDB Table</h4>
+                  <p style="font-size: 0.85rem; color: var(--text-secondary);">Acts as the global registry where every public architecture config is saved instantly with on-demand capacity.</p>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 

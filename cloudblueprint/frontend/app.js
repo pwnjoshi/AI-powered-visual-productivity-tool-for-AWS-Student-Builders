@@ -33,24 +33,60 @@ const MOCK_ARCHITECTURES = [
   }
 ];
 
-// Map AWS Service names to specific icons
+// AWS Service icon map — Official AWS Branded Logos hosted on unpkg CDN
 const SERVICE_ICONS = {
-  "Amplify": "globe", // Use 'globe' for hosting/amplify
-  "API Gateway": "route",
-  "Lambda": "zap",
-  "DynamoDB": "database",
-  "Cognito": "users",
-  "SNS": "bell",
-  "S3": "hard-drive",
-  "CloudFront": "globe",
-  "Route 53": "server",
-  "ACM": "shield-check",
-  "SQS": "mail",
-  "EventBridge": "calendar",
-  "RDS": "database",
-  "ECS": "layers",
-  "Fargate": "cpu"
+  "Amplify": "https://unpkg.com/aws-icons@3.3.0/icons/architecture-service/AWSAmplify.svg",
+  "AWS Amplify": "https://unpkg.com/aws-icons@3.3.0/icons/architecture-service/AWSAmplify.svg",
+  "API Gateway": "https://unpkg.com/aws-icons@3.3.0/icons/architecture-service/AmazonAPIGateway.svg",
+  "Amazon API Gateway": "https://unpkg.com/aws-icons@3.3.0/icons/architecture-service/AmazonAPIGateway.svg",
+  "Lambda": "https://unpkg.com/aws-icons@3.3.0/icons/architecture-service/AWSLambda.svg",
+  "AWS Lambda": "https://unpkg.com/aws-icons@3.3.0/icons/architecture-service/AWSLambda.svg",
+  "DynamoDB": "https://unpkg.com/aws-icons@3.3.0/icons/architecture-service/AmazonDynamoDB.svg",
+  "Amazon DynamoDB": "https://unpkg.com/aws-icons@3.3.0/icons/architecture-service/AmazonDynamoDB.svg",
+  "Cognito": "https://unpkg.com/aws-icons@3.3.0/icons/architecture-service/AmazonCognito.svg",
+  "Amazon Cognito": "https://unpkg.com/aws-icons@3.3.0/icons/architecture-service/AmazonCognito.svg",
+  "CloudFront": "https://unpkg.com/aws-icons@3.3.0/icons/architecture-service/AmazonCloudFront.svg",
+  "Amazon CloudFront": "https://unpkg.com/aws-icons@3.3.0/icons/architecture-service/AmazonCloudFront.svg",
+  "Route 53": "https://unpkg.com/aws-icons@3.3.0/icons/architecture-service/AmazonRoute53.svg",
+  "Amazon Route 53": "https://unpkg.com/aws-icons@3.3.0/icons/architecture-service/AmazonRoute53.svg",
+  "ACM": "https://unpkg.com/aws-icons@3.3.0/icons/architecture-service/AWSCertificateManager.svg",
+  "AWS Certificate Manager": "https://unpkg.com/aws-icons@3.3.0/icons/architecture-service/AWSCertificateManager.svg",
+  "S3": "https://unpkg.com/aws-icons@3.3.0/icons/architecture-service/AmazonS3.svg",
+  "Amazon S3": "https://unpkg.com/aws-icons@3.3.0/icons/architecture-service/AmazonS3.svg",
+  "SNS": "https://unpkg.com/aws-icons@3.3.0/icons/architecture-service/AmazonSimpleNotificationService.svg",
+  "Amazon SNS": "https://unpkg.com/aws-icons@3.3.0/icons/architecture-service/AmazonSimpleNotificationService.svg",
+  "SQS": "https://unpkg.com/aws-icons@3.3.0/icons/architecture-service/AmazonSimpleQueueService.svg",
+  "Amazon SQS": "https://unpkg.com/aws-icons@3.3.0/icons/architecture-service/AmazonSimpleQueueService.svg",
+  "EventBridge": "https://unpkg.com/aws-icons@3.3.0/icons/architecture-service/AmazonEventBridge.svg",
+  "Amazon EventBridge": "https://unpkg.com/aws-icons@3.3.0/icons/architecture-service/AmazonEventBridge.svg",
+  "RDS": "https://unpkg.com/aws-icons@3.3.0/icons/architecture-service/AmazonRDS.svg",
+  "Amazon RDS": "https://unpkg.com/aws-icons@3.3.0/icons/architecture-service/AmazonRDS.svg",
+  "ECS": "https://unpkg.com/aws-icons@3.3.0/icons/architecture-service/AmazonElasticContainerService.svg",
+  "Amazon ECS": "https://unpkg.com/aws-icons@3.3.0/icons/architecture-service/AmazonElasticContainerService.svg",
+  "Fargate": "https://unpkg.com/aws-icons@3.3.0/icons/architecture-service/AWSFargate.svg",
+  "AWS Fargate": "https://unpkg.com/aws-icons@3.3.0/icons/architecture-service/AWSFargate.svg",
+  "Bedrock": "https://unpkg.com/aws-icons@3.3.0/icons/architecture-service/AmazonBedrock.svg",
+  "Amazon Bedrock": "https://unpkg.com/aws-icons@3.3.0/icons/architecture-service/AmazonBedrock.svg",
+  "SageMaker": "https://unpkg.com/aws-icons@3.3.0/icons/architecture-service/AmazonSageMaker.svg",
+  "Amazon SageMaker": "https://unpkg.com/aws-icons@3.3.0/icons/architecture-service/AmazonSageMaker.svg",
+  "CloudWatch": "https://unpkg.com/aws-icons@3.3.0/icons/architecture-service/AmazonCloudWatch.svg",
+  "Amazon CloudWatch": "https://unpkg.com/aws-icons@3.3.0/icons/architecture-service/AmazonCloudWatch.svg",
+  "IAM": "https://unpkg.com/aws-icons@3.3.0/icons/architecture-service/AWSIdentityandAccessManagement.svg",
+  "AWS IAM": "https://unpkg.com/aws-icons@3.3.0/icons/architecture-service/AWSIdentityandAccessManagement.svg",
+  "Step Functions": "https://unpkg.com/aws-icons@3.3.0/icons/architecture-service/AWSStepFunctions.svg",
+  "AWS Step Functions": "https://unpkg.com/aws-icons@3.3.0/icons/architecture-service/AWSStepFunctions.svg",
+  "Stripe": "https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/stripe.svg",
+  "Amazon Location Service": "https://unpkg.com/aws-icons@3.3.0/icons/architecture-service/AmazonLocationService.svg",
+  "EC2": "https://unpkg.com/aws-icons@3.3.0/icons/architecture-service/AmazonEC2.svg",
+  "Amazon EC2": "https://unpkg.com/aws-icons@3.3.0/icons/architecture-service/AmazonEC2.svg",
+  "OpenSearch": "https://unpkg.com/aws-icons@3.3.0/icons/architecture-service/AmazonOpenSearchService.svg",
+  "Amazon OpenSearch": "https://unpkg.com/aws-icons@3.3.0/icons/architecture-service/AmazonOpenSearchService.svg",
+  "Secrets Manager": "https://unpkg.com/aws-icons@3.3.0/icons/architecture-service/AWSSecretsManager.svg",
+  "AWS Secrets Manager": "https://unpkg.com/aws-icons@3.3.0/icons/architecture-service/AWSSecretsManager.svg",
+  "SES": "https://unpkg.com/aws-icons@3.3.0/icons/architecture-service/AmazonSimpleEmailService.svg",
+  "Amazon SES": "https://unpkg.com/aws-icons@3.3.0/icons/architecture-service/AmazonSimpleEmailService.svg"
 };
+
 
 // Global state
 let currentBlueprint = null;
@@ -96,23 +132,55 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  // Model hint switcher
+  const modelSelect = document.getElementById("model-select");
+  const modelHint = document.getElementById("model-hint");
+  const HINTS = {
+    gemma: { cls: "model-hint--gemma", text: "⚡ Fast and reliable. Always works — powered by Gemma 3 27B." },
+    bedrock: { cls: "model-hint--bedrock", text: "⚠️ Amazon Nova 2 Lite via Bedrock. May experience occasional latency or availability issues. Falls back automatically if unreachable." }
+  };
+  if (modelSelect && modelHint) {
+    modelSelect.addEventListener("change", () => {
+      const val = modelSelect.value;
+      modelHint.className = `model-hint ${HINTS[val]?.cls || "model-hint--gemma"}`;
+      modelHint.textContent = HINTS[val]?.text || HINTS.gemma.text;
+    });
+  }
+
   tabGenerator.addEventListener("click", () => {
     tabGenerator.classList.add("active");
     tabHistory.classList.remove("active");
+    tabDocs.classList.remove("active");
     generatorView.classList.add("active");
     historyView.classList.remove("active");
+    docsView.classList.remove("active");
   });
 
   tabHistory.addEventListener("click", async () => {
     tabHistory.classList.add("active");
     tabGenerator.classList.remove("active");
+    tabDocs.classList.remove("active");
     historyView.classList.add("active");
     generatorView.classList.remove("active");
+    docsView.classList.remove("active");
     
     // Fetch latest DynamoDB library
     await fetchSavedBlueprints();
     renderHistoryList();
   });
+
+  const tabDocs = document.getElementById("tab-docs");
+  const docsView = document.getElementById("docs-view");
+  if (tabDocs && docsView) {
+    tabDocs.addEventListener("click", () => {
+      tabDocs.classList.add("active");
+      tabGenerator.classList.remove("active");
+      tabHistory.classList.remove("active");
+      docsView.classList.add("active");
+      generatorView.classList.remove("active");
+      historyView.classList.remove("active");
+    });
+  }
 
   // Fullscreen toggle event listener
   const btnFullscreen = document.getElementById("btn-fullscreen");
@@ -123,13 +191,11 @@ document.addEventListener("DOMContentLoaded", () => {
       document.body.classList.toggle("diagram-fullscreen-active");
       
       // Toggle fullscreen icon between maximize and minimize
-      const icon = btnFullscreen.querySelector("i");
       if (container.classList.contains("fullscreen")) {
-        icon.setAttribute("data-lucide", "minimize-2");
+        btnFullscreen.innerHTML = `<span class="material-symbols-rounded" style="font-size: 20px;">fullscreen_exit</span>`;
       } else {
-        icon.setAttribute("data-lucide", "maximize-2");
+        btnFullscreen.innerHTML = `<span class="material-symbols-rounded" style="font-size: 20px;">fullscreen</span>`;
       }
-      lucide.createIcons();
       
       // Re-trigger SVG connectors coordinates calculation
       if (currentBlueprint) {
@@ -150,35 +216,45 @@ document.addEventListener("DOMContentLoaded", () => {
     btnRefine.addEventListener("click", async () => {
       const idea = ideaInput.value.trim();
       if (!idea) {
-        alert("Please enter a brief idea first to refine it.");
+        ideaInput.focus();
+        ideaInput.style.borderColor = "var(--accent-cyan)";
+        setTimeout(() => ideaInput.style.borderColor = "", 1500);
         return;
       }
-      
+
       btnRefine.disabled = true;
-      const spanEl = btnRefine.querySelector("span");
-      const originalText = spanEl.textContent;
-      spanEl.textContent = "Refining...";
-      
+      btnRefine.innerHTML = `
+        <span class="material-symbols-rounded refine-icon" style="animation: spin 1s linear infinite;">refresh</span>
+        <span>Refining...</span>
+      `;
+
       try {
+        const modelSelectEl = document.getElementById("model-select");
+        const model = modelSelectEl ? modelSelectEl.value : "gemma";
+
         const response = await fetch(`${liveApiUrl}generate`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({ idea, refine: true })
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ idea, refine: true, model })
         });
         if (!response.ok) throw new Error("API Error refining prompt");
         const data = await response.json();
         if (data.refined_idea) {
           ideaInput.value = data.refined_idea;
+          // Flash textarea green briefly to confirm success
+          ideaInput.style.borderColor = "#4ade80";
+          setTimeout(() => ideaInput.style.borderColor = "", 1500);
         } else if (data.error) {
           throw new Error(data.error);
         }
       } catch (err) {
-        alert("Could not refine prompt: " + err.message);
+        console.warn("Refine failed:", err.message);
       } finally {
         btnRefine.disabled = false;
-        spanEl.textContent = originalText;
+        btnRefine.innerHTML = `
+          <span class="material-symbols-rounded refine-icon">auto_fix_high</span>
+          <span>AI Refine</span>
+        `;
       }
     });
   }
@@ -196,11 +272,11 @@ document.addEventListener("DOMContentLoaded", () => {
       "Generating build sequence steps...",
       "Assembling architecture diagram..."
     ];
-    
+
     let phraseIndex = 0;
     generateBtn.disabled = true;
     generateBtn.style.minWidth = "220px";
-    
+
     const updateLoadingText = () => {
       if (phraseIndex < loadingPhrases.length) {
         generateBtn.innerHTML = `
@@ -212,19 +288,20 @@ document.addEventListener("DOMContentLoaded", () => {
         phraseIndex++;
       }
     };
-    
+
     updateLoadingText();
     const loadingInterval = setInterval(updateLoadingText, 2500);
 
     try {
+      const modelSelect = document.getElementById("model-select");
+      const model = modelSelect ? modelSelect.value : "gemma";
+
+      // Try real API, silently fall back to mock on failure
       try {
-        // Call Real API gateway endpoint
         const response = await fetch(`${liveApiUrl}generate`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({ idea })
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ idea, model })
         });
         if (!response.ok) throw new Error("API Network error response");
         currentBlueprint = await response.json();
@@ -233,7 +310,7 @@ document.addEventListener("DOMContentLoaded", () => {
         currentBlueprint = generateMockBlueprint(idea);
       }
 
-      // Add to saved history
+      // Add to saved history and render
       savedBlueprints.unshift(currentBlueprint);
       renderBlueprintResult(currentBlueprint);
     } catch (err) {
@@ -289,13 +366,236 @@ function renderBlueprintResult(blueprint) {
 
   // Render Visual Architecture Diagram Flow (SVG + nodes layer)
   renderVisualDiagram(blueprint.services);
-  
+
+  // Generate & display Agent Blueprint markdown
+  const agentMd = generateAgentBlueprint(blueprint);
+  const agentPre = document.getElementById("agent-blueprint-content");
+  if (agentPre) agentPre.textContent = agentMd;
+
+  // Copy button
+  const btnCopy = document.getElementById("btn-copy-blueprint");
+  if (btnCopy) {
+    btnCopy.onclick = async () => {
+      await navigator.clipboard.writeText(agentMd);
+      btnCopy.innerHTML = `<span class="material-symbols-rounded" style="font-size:18px;">check_circle</span><span>Copied!</span>`;
+      btnCopy.style.color = "#4ade80";
+      setTimeout(() => {
+        btnCopy.innerHTML = `<span class="material-symbols-rounded" style="font-size:18px;">content_copy</span><span>Copy</span>`;
+        btnCopy.style.color = "";
+      }, 2000);
+    };
+  }
+
+  // Download button
+  const btnDownload = document.getElementById("btn-download-blueprint");
+  if (btnDownload) {
+    btnDownload.onclick = () => {
+      const slug = blueprint.idea_text.substring(0, 30).toLowerCase().replace(/\s+/g, "-").replace(/[^a-z0-9-]/g, "");
+      const filename = `cloudblueprint-${slug}.md`;
+      const blob = new Blob([agentMd], { type: "text/markdown" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url; a.download = filename; a.click();
+      URL.revokeObjectURL(url);
+    };
+  }
+
   // Re-run Lucide
   lucide.createIcons();
   
   // Scroll down smoothly to show results
   resultContainer.scrollIntoView({ behavior: "smooth" });
 }
+
+// ═══════════════════════════════════════════════════════════
+//  AGENT BLUEPRINT GENERATOR
+//  Produces a structured markdown manifest that AI agents
+//  (Claude, Gemini, Copilot, etc.) can consume to autonomously
+//  build the complete AWS infrastructure from scratch.
+// ═══════════════════════════════════════════════════════════
+function generateAgentBlueprint(blueprint) {
+  const now = new Date().toISOString().split("T")[0];
+  const services = blueprint.services || [];
+  const steps = blueprint.build_steps || [];
+
+  // Service → role mapping heuristic
+  const roleMap = {
+    "Lambda": "Serverless compute — runs business logic handlers",
+    "AWS Lambda": "Serverless compute — runs business logic handlers",
+    "API Gateway": "REST/WebSocket API entry point — routes requests to Lambda",
+    "DynamoDB": "NoSQL database — stores and retrieves application data",
+    "Amazon DynamoDB": "NoSQL database — stores and retrieves application data",
+    "S3": "Object storage — hosts static assets, files, or frontend build",
+    "Amazon S3": "Object storage — hosts static assets, files, or frontend build",
+    "Cognito": "User authentication — sign-up, sign-in, JWT token management",
+    "Amazon Cognito": "User authentication — sign-up, sign-in, JWT token management",
+    "CloudFront": "CDN — serves frontend globally with low latency via edge locations",
+    "Amplify": "Frontend hosting — CI/CD pipeline for static web apps",
+    "Route 53": "DNS — routes custom domain to CloudFront or API Gateway",
+    "SNS": "Pub/Sub notifications — fan-out events to multiple subscribers",
+    "SQS": "Message queue — decouples producer/consumer workloads",
+    "EventBridge": "Event bus — triggers serverless workflows on scheduled or custom events",
+    "RDS": "Relational database — structured data with SQL queries",
+    "ECS": "Container orchestration — runs Dockerized application services",
+    "Fargate": "Serverless containers — no EC2 management required",
+    "Bedrock": "Generative AI — invoke foundation models (Nova, Claude, Titan) via API",
+    "SageMaker": "ML platform — train, deploy, and serve custom ML models",
+    "IAM": "Identity & Access Management — define least-privilege roles and policies",
+    "ACM": "SSL/TLS certificate management — HTTPS for custom domains",
+    "CloudWatch": "Monitoring — logs, metrics, alarms and dashboards",
+    "SES": "Email delivery — transactional and marketing emails",
+    "Secrets Manager": "Secrets management — securely store API keys and credentials",
+    "Step Functions": "Workflow orchestration — coordinate multi-step serverless pipelines",
+  };
+
+  const serviceTable = services.map(svc => {
+    const role = roleMap[svc] || "Supporting AWS service";
+    return `| ${svc} | ${role} |`;
+  }).join("\n");
+
+  const stepsMarkdown = steps.map((s, i) => `${i + 1}. ${s}`).join("\n");
+
+  // IaC hints per service
+  const cdkHints = services.map(svc => {
+    const s = svc.toLowerCase();
+    if (s.includes("lambda")) return "  - `aws_lambda.Function` — Python 3.12 runtime, 256MB memory, 30s timeout";
+    if (s.includes("api gateway")) return "  - `aws_apigateway.RestApi` — CORS enabled, Lambda proxy integration";
+    if (s.includes("dynamo")) return "  - `aws_dynamodb.Table` — PAY_PER_REQUEST billing, point-in-time recovery enabled";
+    if (s.includes(" s3") || s === "s3" || s.includes("amazon s3")) return "  - `aws_s3.Bucket` — versioning enabled, lifecycle rules for cost optimization";
+    if (s.includes("cognito")) return "  - `aws_cognito.UserPool` — email verification, secure password policy";
+    if (s.includes("cloudfront")) return "  - `aws_cloudfront.Distribution` — S3 origin with OAC, HTTPS only";
+    if (s.includes("amplify")) return "  - `aws_amplify.App` — GitHub source, auto build on push";
+    if (s.includes("sns")) return "  - `aws_sns.Topic` — standard type, email/Lambda subscriptions";
+    if (s.includes("sqs")) return "  - `aws_sqs.Queue` — visibility timeout 300s, dead-letter queue attached";
+    if (s.includes("rds")) return "  - `aws_rds.DatabaseInstance` — Aurora Serverless v2, auto-pause enabled";
+    if (s.includes("bedrock")) return "  - Invoke via `boto3.client('bedrock-runtime').converse()` — model: `us.amazon.nova-2-lite-v1:0`";
+    return `  - Configure **${svc}** via AWS CDK L2 construct`;
+  }).join("\n");
+
+  const agentPrompt = `You are an expert AWS Solutions Architect and DevOps Engineer.
+Your task is to FULLY BUILD the following AWS architecture using AWS CDK (Python).
+Do NOT ask for clarification. Make reasonable defaults for anything not specified.
+Deploy everything to us-east-1. Use least-privilege IAM roles throughout.
+After writing all CDK code, provide a single \`cdk deploy\` command to ship it all.`;
+
+  return `# 🏗️ CloudBlueprint — Agent Manifest
+> Generated by CloudBlueprint AI on ${now}
+> **Project:** ${blueprint.idea_text}
+
+---
+
+## 🎯 Objective
+
+${blueprint.architecture_summary}
+
+**Complexity:** ${blueprint.complexity}
+**Estimated Cost:** ${blueprint.estimated_monthly_cost || blueprint.estimated_cost || "Free Tier Eligible"}
+
+---
+
+## ☁️ AWS Services Required
+
+| Service | Role |
+|---------|------|
+${serviceTable}
+
+---
+
+## 📋 Build Sequence
+
+${stepsMarkdown}
+
+---
+
+## ⚙️ Infrastructure as Code (AWS CDK — Python)
+
+Use the following CDK constructs to build this architecture:
+
+\`\`\`
+CDK Stack: ${blueprint.idea_text.substring(0, 24).replace(/\s+/g, "")}Stack
+Region: us-east-1
+Language: Python
+\`\`\`
+
+### Recommended CDK Constructs:
+${cdkHints}
+
+### Project Setup:
+\`\`\`bash
+mkdir my-aws-project && cd my-aws-project
+cdk init app --language python
+pip install aws-cdk-lib constructs boto3
+\`\`\`
+
+---
+
+## 🤖 Agent Prompt (paste directly into any AI agent)
+
+\`\`\`
+${agentPrompt}
+
+### Architecture to build:
+Idea: ${blueprint.idea_text}
+
+Services: ${services.join(", ")}
+
+Summary: ${blueprint.architecture_summary}
+
+Build steps:
+${stepsMarkdown}
+
+### Constraints:
+- Use AWS CDK (Python) for all infrastructure
+- Region: us-east-1
+- Enforce least-privilege IAM on every resource
+- Enable CloudWatch logging on all Lambda functions
+- Add error handling and retries where applicable
+- Output all important ARNs and URLs as CDK CfnOutput
+\`\`\`
+
+---
+
+## 📁 Expected Project Structure
+
+\`\`\`
+my-aws-project/
+├── app.py                    # CDK app entry point
+├── cdk.json
+├── requirements.txt
+├── stacks/
+│   └── main_stack.py         # Primary infrastructure stack
+├── lambda/
+│   └── handler.py            # Lambda function code
+└── README.md
+\`\`\`
+
+---
+
+## 🔐 IAM & Security Checklist
+
+- [ ] All Lambda execution roles use least-privilege policies
+- [ ] S3 buckets block public access (unless serving frontend)
+- [ ] DynamoDB encryption at rest enabled
+- [ ] API Gateway uses IAM or Cognito authorizer
+- [ ] Secrets stored in Secrets Manager — never in env vars
+- [ ] CloudWatch alarms set for Lambda errors and API 5xx rates
+
+---
+
+## 🚀 Deploy Command
+
+\`\`\`bash
+cdk synth   # Preview CloudFormation template
+cdk deploy  # Deploy to AWS (us-east-1)
+\`\`\`
+
+---
+
+*Built with [CloudBlueprint](https://cloudblueprint.ai) — AI-powered AWS Architecture Generator*
+`;
+}
+
+
 
 // Helper to create element with attributes and text content
 function createDOMNode(tag, classes = [], content = "", id = "") {
@@ -310,171 +610,185 @@ function createDOMNode(tag, classes = [], content = "", id = "") {
 function renderVisualDiagram(services) {
   const nodesLayer = document.getElementById("diagram-nodes-layer");
   const canvas = document.getElementById("diagram-canvas");
-  
   nodesLayer.innerHTML = "";
   canvas.innerHTML = "";
 
-  // Structure layout container (flex column)
-  const mainFlow = createDOMNode("div", ["main-flow-wrapper"]);
-  mainFlow.style.display = "flex";
-  mainFlow.style.flexDirection = "column";
-  mainFlow.style.alignItems = "center";
-  mainFlow.style.width = "100%";
-  mainFlow.style.gap = "20px";
-  
-  // 1. Users Node at top
-  const userNode = createDOMNode("div", ["user-node"]);
-  userNode.innerHTML = `
-    <div class="user-icon"><i data-lucide="users"></i></div>
-    <div class="user-label">End Users</div>
-  `;
-  mainFlow.appendChild(userNode);
+  // --- Classify services into architecture layers ---
+  const layers = {
+    users:   [],   // always injected
+    cdn:     [],   // CloudFront, Route 53, ACM, Amplify
+    api:     [],   // API Gateway, ALB, ELB
+    compute: [],   // Lambda, ECS, Fargate, EC2
+    data:    [],   // DynamoDB, RDS, S3, Aurora, OpenSearch
+    auth:    [],   // Cognito, IAM, Secrets Manager
+    integration: [],// SNS, SQS, EventBridge, Step Functions
+    ai:      [],   // Bedrock, SageMaker
+    other:   [],   // Stripe, Location, CloudWatch, SES, etc.
+  };
 
-  // Classify services into tiers
-  const ingressServices = []; // CDN/Hosting, DNS, ACM
-  const publicSubnetServices = []; // API Gateway, Load Balancer
-  const privateSubnetServices = []; // Lambdas, Compute
-  const databaseServices = []; // DynamoDB, RDS, S3 buckets
-  const utilityServices = []; // SNS, EventBridge, Cognito
+  const classify = (svc) => {
+    const s = svc.toLowerCase();
+    if (["cloudfront","route 53","route53","acm","amplify","aws amplify","amazon cloudfront","amazon route 53"].includes(s)) return "cdn";
+    if (s.includes("api gateway") || s.includes("alb") || s.includes("load balancer")) return "api";
+    if (s.includes("lambda") || s.includes("ecs") || s.includes("fargate") || s.includes("ec2")) return "compute";
+    if (s.includes("dynamo") || s.includes("rds") || s.includes("aurora") || s.includes(" s3") || s === "s3" || s.includes("amazon s3") || s.includes("opensearch") || s.includes("elasticache")) return "data";
+    if (s.includes("cognito") || s.includes("iam") || s.includes("secrets") || s.includes("acm")) return "auth";
+    if (s.includes("sns") || s.includes("sqs") || s.includes("eventbridge") || s.includes("step function") || s.includes("ses")) return "integration";
+    if (s.includes("bedrock") || s.includes("sagemaker") || s.includes("rekognition") || s.includes("comprehend") || s.includes("textract")) return "ai";
+    return "other";
+  };
 
   services.forEach(svc => {
-    if (["CloudFront", "Route 53", "ACM", "Amplify"].includes(svc)) {
-      ingressServices.push(svc);
-    } else if (["API Gateway", "ALB", "Application Load Balancer"].includes(svc)) {
-      publicSubnetServices.push(svc);
-    } else if (["Lambda", "ECS", "Fargate", "Compute"].includes(svc)) {
-      privateSubnetServices.push(svc);
-    } else if (["DynamoDB", "RDS", "S3"].includes(svc)) {
-      databaseServices.push(svc);
-    } else {
-      utilityServices.push(svc);
-    }
+    const layer = classify(svc);
+    layers[layer].push(svc);
   });
 
-  // 2. Ingress Tier (External to VPC/Direct web entry)
-  if (ingressServices.length > 0) {
-    const ingressRow = createDOMNode("div", ["subnet-row"]);
-    ingressServices.forEach(svc => {
-      ingressRow.appendChild(createArchNodeElement(svc));
-    });
-    mainFlow.appendChild(ingressRow);
-  }
+  // Build DOM
+  const wrapper = document.createElement("div");
+  wrapper.className = "arch-diagram-wrapper";
 
-  // 3. VPC Container
-  const needsVpc = publicSubnetServices.length > 0 || privateSubnetServices.length > 0;
-  if (needsVpc) {
-    const vpc = createDOMNode("div", ["vpc-container"]);
-    vpc.innerHTML = `<div class="vpc-label"><i data-lucide="shield"></i> Amazon VPC Region Stack</div>`;
-    
-    // Public Subnet
-    if (publicSubnetServices.length > 0) {
-      const pubSubnet = createDOMNode("div", ["subnet-box", "public"]);
-      pubSubnet.innerHTML = `<div class="subnet-label">Public Subnet (DMZ)</div>`;
-      publicSubnetServices.forEach(svc => {
-        pubSubnet.appendChild(createArchNodeElement(svc));
-      });
-      vpc.appendChild(pubSubnet);
-    }
+  // Helper: make a labeled layer group
+  const makeGroup = (labelText, colorClass, nodes) => {
+    const group = document.createElement("div");
+    group.className = `arch-layer-group arch-layer--${colorClass}`;
+    const label = document.createElement("div");
+    label.className = "arch-layer-label";
+    label.textContent = labelText;
+    group.appendChild(label);
+    const row = document.createElement("div");
+    row.className = "arch-nodes-row";
+    nodes.forEach(svc => row.appendChild(createArchNodeElement(svc)));
+    group.appendChild(row);
+    return group;
+  };
 
-    // Private Subnet
-    if (privateSubnetServices.length > 0) {
-      const privSubnet = createDOMNode("div", ["subnet-box", "private"]);
-      privSubnet.innerHTML = `<div class="subnet-label">Private Subnet (Isolated Compute)</div>`;
-      privateSubnetServices.forEach(svc => {
-        privSubnet.appendChild(createArchNodeElement(svc));
-      });
-      vpc.appendChild(privSubnet);
-    }
-
-    mainFlow.appendChild(vpc);
-  } else {
-    // If pure serverless non-VPC stack, stack them cleanly
-    if (publicSubnetServices.length > 0) {
-      const row = createDOMNode("div", ["subnet-row"]);
-      publicSubnetServices.forEach(svc => row.appendChild(createArchNodeElement(svc)));
-      mainFlow.appendChild(row);
-    }
-    if (privateSubnetServices.length > 0) {
-      const row = createDOMNode("div", ["subnet-row"]);
-      privateSubnetServices.forEach(svc => row.appendChild(createArchNodeElement(svc)));
-      mainFlow.appendChild(row);
-    }
-  }
-
-  // 4. Storage & Persistence Tier
-  if (databaseServices.length > 0) {
-    const dbRow = createDOMNode("div", ["subnet-row"]);
-    dbRow.style.marginTop = "10px";
-    databaseServices.forEach(svc => {
-      dbRow.appendChild(createArchNodeElement(svc));
-    });
-    mainFlow.appendChild(dbRow);
-  }
-
-  // 5. Shared Utility Services (Floating on side)
-  if (utilityServices.length > 0) {
-    const utilityRow = createDOMNode("div", ["subnet-row"]);
-    utilityRow.style.marginTop = "10px";
-    utilityServices.forEach(svc => {
-      utilityRow.appendChild(createArchNodeElement(svc));
-    });
-    mainFlow.appendChild(utilityRow);
-  }
-
-  nodesLayer.appendChild(mainFlow);
-
-  // Setup SVG dimensions based on fully computed heights
-  setTimeout(() => {
-    const width = nodesLayer.clientWidth || 550;
-    const height = nodesLayer.clientHeight || 450;
-    canvas.setAttribute("viewBox", `0 0 ${width} ${height}`);
-    
-    // Find absolute coordinates relative to the nodesLayer bounding rect
-    const parentRect = nodesLayer.getBoundingClientRect();
-    const nodeElements = Array.from(nodesLayer.querySelectorAll(".arch-node, .user-node"));
-    
-    const positions = nodeElements.map(el => {
-      const rect = el.getBoundingClientRect();
-      return {
-        id: el.querySelector(".node-name")?.textContent || "users",
-        x: rect.left - parentRect.left + rect.width / 2,
-        y: rect.top - parentRect.top + rect.height / 2
-      };
-    });
-
-    let pathD = "";
-    // Line connectors flow top down chronologically matching actual offsets
-    for (let i = 0; i < positions.length - 1; i++) {
-      const p1 = positions[i];
-      const p2 = positions[i+1];
-      
-      // Calculate curve
-      pathD += ` M ${p1.x} ${p1.y} C ${p1.x} ${(p1.y + p2.y)/2}, ${p2.x} ${(p1.y + p2.y)/2}, ${p2.x} ${p2.y}`;
-    }
-
-    canvas.innerHTML = `
-      <defs>
-        <linearGradient id="glow-line" x1="0%" y1="0%" x2="0%" y2="100%">
-          <stop offset="0%" stop-color="#06b6d4" />
-          <stop offset="100%" stop-color="#8b5cf6" />
-        </linearGradient>
-      </defs>
-      <path d="${pathD}" fill="none" stroke="url(#glow-line)" stroke-width="2" stroke-dasharray="5,5" opacity="0.5" />
+  // Helper: make an arrow connector div
+  const makeArrow = (label = "") => {
+    const arrow = document.createElement("div");
+    arrow.className = "arch-arrow";
+    arrow.innerHTML = `
+      <div class="arch-arrow-line"></div>
+      ${label ? `<span class="arch-arrow-label">${label}</span>` : ""}
+      <div class="arch-arrow-head">▼</div>
     `;
-  }, 150);
+    return arrow;
+  };
+
+  // ── Users ──
+  const userNode = document.createElement("div");
+  userNode.className = "user-node";
+  userNode.innerHTML = `
+    <svg width="48" height="48" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="32" cy="20" r="13" fill="none" stroke="#a5b4fc" stroke-width="4"/>
+      <path d="M8 56 Q8 38 32 38 Q56 38 56 56" fill="none" stroke="#a5b4fc" stroke-width="4" stroke-linecap="round"/>
+      <circle cx="14" cy="28" r="9" fill="none" stroke="#a5b4fc" stroke-width="3" opacity=".55"/>
+      <path d="M2 50 Q2 39 14 39 Q20 39 24 43" fill="none" stroke="#a5b4fc" stroke-width="3" stroke-linecap="round" opacity=".55"/>
+      <circle cx="50" cy="28" r="9" fill="none" stroke="#a5b4fc" stroke-width="3" opacity=".55"/>
+      <path d="M62 50 Q62 39 50 39 Q44 39 40 43" fill="none" stroke="#a5b4fc" stroke-width="3" stroke-linecap="round" opacity=".55"/>
+    </svg>
+    <div class="user-label">End Users</div>
+  `;
+  wrapper.appendChild(userNode);
+
+  // ── CDN / Hosting ──
+  if (layers.cdn.length) {
+    wrapper.appendChild(makeArrow("HTTPS"));
+    wrapper.appendChild(makeGroup("Frontend / Hosting Layer", "cdn", layers.cdn));
+  }
+
+  // ── API Layer ──
+  if (layers.api.length) {
+    wrapper.appendChild(makeArrow("REST / WebSocket"));
+    wrapper.appendChild(makeGroup("API Layer", "api", layers.api));
+  }
+
+  // ── Auth (side, shown inline before compute if both exist) ──
+  const hasCompute = layers.compute.length > 0;
+  const hasAuth = layers.auth.length > 0;
+  const hasAI = layers.ai.length > 0;
+
+  if (hasCompute || hasAuth || hasAI) {
+    wrapper.appendChild(makeArrow("invokes"));
+
+    // Multi-column row for Compute | Auth | AI
+    const midRow = document.createElement("div");
+    midRow.className = "arch-mid-columns";
+
+    if (hasCompute) {
+      const computeGroup = makeGroup("Compute Layer", "compute", layers.compute);
+      midRow.appendChild(computeGroup);
+    }
+    if (hasAuth) {
+      const authGroup = makeGroup("Auth & Security", "auth", layers.auth);
+      midRow.appendChild(authGroup);
+    }
+    if (hasAI) {
+      const aiGroup = makeGroup("AI / ML", "ai", layers.ai);
+      midRow.appendChild(aiGroup);
+    }
+    wrapper.appendChild(midRow);
+  }
+
+  // ── Integration ──
+  if (layers.integration.length) {
+    wrapper.appendChild(makeArrow("events / messages"));
+    wrapper.appendChild(makeGroup("Integration & Messaging", "integration", layers.integration));
+  }
+
+  // ── Data ──
+  if (layers.data.length) {
+    wrapper.appendChild(makeArrow("reads / writes"));
+    wrapper.appendChild(makeGroup("Data & Storage Layer", "data", layers.data));
+  }
+
+  // ── Other ──
+  if (layers.other.length) {
+    wrapper.appendChild(makeGroup("Other Services", "other", layers.other));
+  }
+
+  nodesLayer.appendChild(wrapper);
 }
+
+
 
 function createArchNodeElement(serviceName) {
   const node = createDOMNode("div", ["arch-node"]);
-  const cleanIcon = SERVICE_ICONS[serviceName] || "cpu";
+
+  // Color fallback for unknown services
+  const CATEGORY_COLOR = {
+    "lambda": "#ED7100", "compute": "#ED7100", "ecs": "#ED7100", "fargate": "#ED7100", "ec2": "#ED7100",
+    "s3": "#3F8624", "storage": "#3F8624", "amplify": "#6940D6",
+    "dynamo": "#3B48CC", "rds": "#3B48CC", "database": "#3B48CC", "aurora": "#3B48CC",
+    "api": "#8C4FFF", "cloudfront": "#8C4FFF", "route": "#8C4FFF",
+    "cognito": "#DD344C", "iam": "#DD344C", "acm": "#DD344C", "secrets": "#DD344C",
+    "sns": "#E7157B", "sqs": "#E7157B", "event": "#E7157B", "ses": "#E7157B",
+    "bedrock": "#01A88D", "sagemaker": "#01A88D", "ai": "#01A88D",
+    "cloudwatch": "#232F3E", "stripe": "#635BFF",
+  };
+
+  let iconUrl = SERVICE_ICONS[serviceName];
+  let iconHtml;
+
+  if (iconUrl) {
+    iconHtml = `<img src="${iconUrl}" alt="${serviceName}" style="width:38px;height:38px;object-fit:contain;display:block;">`;
+  } else {
+    // Generate a color-coded fallback badge from service initials
+    const lower = serviceName.toLowerCase();
+    let bg = "#4a5568";
+    for (const [key, col] of Object.entries(CATEGORY_COLOR)) {
+      if (lower.includes(key)) { bg = col; break; }
+    }
+    const initials = serviceName.split(/\s+/).map(w => w[0]).join("").slice(0, 3).toUpperCase();
+    iconHtml = `<div style="width:38px;height:38px;border-radius:10px;background:${bg};display:flex;align-items:center;justify-content:center;font-weight:800;font-size:11px;color:white;font-family:monospace;letter-spacing:-0.5px;">${initials}</div>`;
+  }
+
   node.innerHTML = `
-    <div class="node-icon-wrapper">
-      <i data-lucide="${cleanIcon}"></i>
-    </div>
+    <div class="node-icon-wrapper">${iconHtml}</div>
     <div class="node-name">${serviceName}</div>
   `;
   return node;
 }
+
 
 // Generate high quality Mock Response
 function generateMockBlueprint(idea) {
