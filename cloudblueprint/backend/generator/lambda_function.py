@@ -7,24 +7,25 @@ import boto3
 import os
 import base64
 
-# Initialize AWS DynamoDB client
+# Initialize AWS clients
 dynamodb = boto3.resource('dynamodb')
 table = dynamodb.Table('SavedArchitectures')
+ssm = boto3.client('ssm')
 
-NEBIUS_API_KEY = os.environ.get("NEBIUS_API_KEY")
-if not NEBIUS_API_KEY:
-    enc_neb = b"ZDFleU1VTnJTRGhsTTBacFpqZ3hlVjV1WTJkWFNJbE5aSEp2YVdObFlXTjliV0FnTlVCbWRtc3JZV1F4TldaaVlXUXhOVEppTWd4SmNuZHBhMmRKS0VsT21EWkNUbWMzUW5SallWbFpaM2hRV0UxaGNYTm1NV0pCSUVocGNIVm9TbkpyU3pVNWNFMWhVM1JoYzJoNFdIaHplVnA1UlNzeFZtNXNaVnBYVVc5eWNtMTNjbTloZEUxaGJ6WlpNSE5rY1VscU5FNVRZM1Z4UkU1NVZGbDFWbXBEUTJWclkycEdNVjF1VEVOdGFtSm5VbTVUYlZOQ1FVMDFjM0kwWDI0dg=="
-    NEBIUS_API_KEY = base64.b64decode(base64.b64decode(base64.b64decode(enc_neb))).decode("utf-8")
+# Dynamically retrieve credentials from AWS Systems Manager (SSM) Parameter Store
+def get_secure_parameter(param_name, env_fallback):
+    try:
+        # Fetch decrypted parameter from SSM
+        response = ssm.get_parameter(Name=param_name, WithDecryption=True)
+        return response['Parameter']['Value']
+    except Exception as e:
+        print(f"SSM Fetch failed for {param_name}, falling back to Environment: {e}")
+        return os.environ.get(env_fallback, "")
+
+NEBIUS_API_KEY = get_secure_parameter("/cloudblueprint/nebius_api_key", "NEBIUS_API_KEY")
 NEBIUS_URL = "https://api.tokenfactory.nebius.com/v1/chat/completions"
 
-# Load Bedrock API Key from Environment variable if available
-# Otherwise load via safe obfuscation decoding to bypass static push protection scanners
-BEDROCK_API_KEY = os.environ.get("BEDROCK_API_KEY")
-if not BEDROCK_API_KEY:
-    # Decrypt obfuscated token dynamically at runtime
-    enc = b"QUJTS1FtVktaM0pqYzBGUVNVdGxlUzF1WVcxdExXRjBMVEF4TXpFeU5EYzJNelk0T2RvMmdtVmxlR3BTVTFCcE4xWjVXRm95U25wNE1FWkRZaTFVWTIxWVdsTkhaMWhXTVZwbldWcHpNMUpyTkhjek5WTmZkenc9"
-    BEDROCK_API_KEY = base64.b64decode(base64.b64decode(enc)).decode("utf-8")
-
+BEDROCK_API_KEY = get_secure_parameter("/cloudblueprint/bedrock_api_key", "BEDROCK_API_KEY")
 BEDROCK_OPENAI_URL = "https://bedrock-mantle.us-east-1.api.aws/v1/chat/completions"
 BEDROCK_MODEL = "us.amazon.nova-2-lite-v1:0"
 
